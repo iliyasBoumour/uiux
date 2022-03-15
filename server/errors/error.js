@@ -8,7 +8,7 @@ const routeNoteFound = (req, res) => {
     res.status(statusCode).json({
       message: err.message,
       statusCode,
-      stack: process.env.ENV == "development" && err.stack,
+      stack: process.env.ENV == err.stack,
     });
   };
   module.exports = { routeNoteFound, catchErrors };

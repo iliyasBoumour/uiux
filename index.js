@@ -6,11 +6,12 @@ dotenv.config();
 const app=express()
 connecDb();
 
-app.use("/api/products", require(".server/routes/product.routes"));
+app.use("/api/products", require("./server/routes/product.routes"));
+app.use("/api/:id/orders", require("./server/routes/order.routes"));
 app.use(routeNoteFound);
 app.use(catchErrors);
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3001;
 
 app.listen(port, () => {
   console.log(`server running on port ${port}`);
