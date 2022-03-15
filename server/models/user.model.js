@@ -15,25 +15,13 @@ const userSchema = mongoose.Schema(
       required: true,
       unique: true,
     },
-    adress_num: {
-      type: Number,
-      required: true,
-    },
-    adress_rue: {
+    password: {
       type: String,
       required: true,
+      unique: true,
     },
-    city: {
+    adress: {
       type: String,
-      required: true,
-    },
-    zip_code: {
-      type: Number,
-      required: true,
-    },
-    zip_code: {
-      type: Number,
-      required: true,
     },
   },
   { timestamps: true }

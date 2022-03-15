@@ -1,18 +1,15 @@
-// const express = require("express");
-// const router = express.Router();
-// const {
-//   addUser
-// } = require("../controllers/order.controller");
+const express = require("express");
+const router = express.Router();
+const { addUser, login } = require("../controllers/user.controller");
 
-// // @desc    Fetch all orders
-// // @route   GET/POST /api/:id/orders
-// // @access  Private
-// router.route("/").get(getOrders).post(addOrder);
+// @desc    create user
+// @route   GET/POST /api/auth/register
+// @access  Private
+router.route("/register").post(addUser);
 
-// // @desc    Fetch all orders
-// // @route   GET/POST /api/:id/orders
-// // @access  Private
-// router.route("/:orderId").get(getOneOrder);
+// @desc    login
+// @route   GET/POST /api/auth/login
+// @access  Private
+router.route("/login").post(login);
 
-
-// module.exports = router;
+module.exports = router;
