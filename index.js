@@ -6,6 +6,7 @@ dotenv.config();
 const app=express()
 connecDb();
 
+app.use("/api/products", require(".server/routes/product.routes"));
 app.use(routeNoteFound);
 app.use(catchErrors);
 
