@@ -18,6 +18,10 @@ To install:
 Frontend
 
 ```
+cd client
+```
+
+```
 npm install
 ```
 
