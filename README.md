@@ -43,26 +43,13 @@ npm run seed
 ```
 
 # Run
-
-Backend
-
-```
-npm run server
-```
-
-Frontend
-
-Go to frontend directory
+In package.json there is a script that will run the backend and the frontend both
 
 ```
-cd client
+npm run dev
 ```
+![3Capture d’écran 2022-03-16 082318](https://user-images.githubusercontent.com/67969827/158537602-43890199-a3d8-4909-bfbc-424af0d8b8ea.png)
 
-Start the server
-
-```
-npm run start
-```
 
 # Final Message
 Hope You Enjoy the project!
