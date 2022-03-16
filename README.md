@@ -43,13 +43,22 @@ npm run seed
 ```
 
 # Run
-In package.json there is a script that will run the backend and the frontend both
+In package.json there is a script dev that will run the backend and the frontend both
 
 ```
 npm run dev
 ```
 ![3Capture d’écran 2022-03-16 082318](https://user-images.githubusercontent.com/67969827/158537602-43890199-a3d8-4909-bfbc-424af0d8b8ea.png)
 
+# Functionalities
+
+- User can register, login and logout
+- User can add products to cart even if he is not connected
+- User can remove product from cart
+- User can change the quantity of product before making an order
+- User can make an order if he is connected
+- Once the order is made by default it's invalid
+- Orders can be validated by an administrator, credentials of admin : (email : admin@gmail.com  |  password : 123456)
 
 # Final Message
 Hope You Enjoy the project!
