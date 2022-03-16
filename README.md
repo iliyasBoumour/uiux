@@ -30,7 +30,8 @@ Backend
 ```
 npm install
 ```
-https://user-images.githubusercontent.com/67969827/158536859-2013b8ce-3363-489f-8a47-3176b4edc814.png
+![Capture d’écran 2022-03-16 081822](https://user-images.githubusercontent.com/67969827/158537017-f0748112-180e-4a12-b8cf-f1c826991a51.png)
+
 
 # Database
 
