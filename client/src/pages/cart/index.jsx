@@ -1,21 +1,22 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { Store } from "../../utils/Store";
 import { add, remove, removeAll } from "../../utils/actions/cartAction";
 
 const Index = () => {
+  const [adress, setAdress] = useState("");
   const { state, dispatch } = useContext(Store);
   const {
     cart: { cartItems },
     auth: { token },
   } = state;
+  const config = {
+    headers: {
+      Authorization: token,
+    },
+  };
   const addOrder = async () => {
-    const config = {
-      headers: {
-        Authorization: token,
-      },
-    };
     const items = cartItems.map((i) => {
       return { _id: i._id, qty: i.qty };
     });
@@ -31,6 +32,35 @@ const Index = () => {
       alert(message);
     }
   };
+  const updateAdress = async () => {
+    try {
+      await axios.put("/api/auth/updateUser", { adress }, config);
+      alert("Adress updated");
+    } catch (error) {
+      const message =
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message;
+      alert(message);
+    }
+  };
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const { data } = await axios.get("/api/auth/profile", config);
+        setAdress(data.adress);
+      } catch (error) {
+        const message =
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message;
+        console.log(message);
+        alert(message);
+      }
+    };
+    getUser();
+  }, []);
+
   return (
     <>
       {cartItems.length === 0 ? (
@@ -87,7 +117,7 @@ const Index = () => {
           </table>
           <div
             style={{
-              width: "50%",
+              width: "20%",
               padding: ".5rem",
               border: "1px solid black",
             }}
@@ -98,6 +128,18 @@ const Index = () => {
               {cartItems.reduce((a, c) => a + c.qty * c.price, 0).toFixed(2)}
             </h3>
             <button onClick={addOrder}>Add order</button>
+          </div>
+
+          <div
+            style={{
+              width: "20%",
+              padding: ".5rem",
+              border: "1px solid black",
+            }}
+          >
+            <h3>Adress</h3>
+            <input value={adress} onChange={(e) => setAdress(e.target.value)} />
+            <button onClick={updateAdress}>Update</button>
           </div>
         </div>
       )}

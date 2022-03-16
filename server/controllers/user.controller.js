@@ -67,4 +67,19 @@ const updateAdress = asyncHandler(async (req, res) => {
     email: user.email,
   });
 });
-module.exports = { addUser, login, updateAdress };
+const getUser = asyncHandler(async (req, res) => {
+  const user = await userModel.findById(req.user._id);
+  if (!user) {
+    res.status(404);
+    throw new Error("user not found");
+  }
+  res.json({
+    _id: user._id,
+    adress: user.adress,
+    fname: user.fname,
+    lname: user.lname,
+    email: user.email,
+  });
+});
+
+module.exports = { addUser, login, updateAdress, getUser };

@@ -5,6 +5,7 @@ const {
   addUser,
   login,
   updateAdress,
+  getUser,
 } = require("../controllers/user.controller");
 
 // @desc    create user
@@ -21,5 +22,10 @@ router.route("/login").post(login);
 // @route   PUT /api/auth/updateUser
 // @access  Private
 router.route("/updateUser").put(validateJwt, updateAdress);
+
+// @desc    get current profile
+// @route   GET /api/auth/profile
+// @access  Private
+router.route("/profile").get(validateJwt, getUser);
 
 module.exports = router;
