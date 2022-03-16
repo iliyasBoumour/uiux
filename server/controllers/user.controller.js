@@ -5,7 +5,7 @@ const signJwt = require("../utils/signJwt");
 
 const addUser = asyncHandler(async (req, res) => {
   let { fname, lname, email, password, adress } = req.body;
-  if (!fname || !lname || !email || !password) {
+  if (!fname || !lname || !email || !password || !adress) {
     res.status(400);
     throw new Error("All fields are required");
   }
@@ -16,7 +16,7 @@ const addUser = asyncHandler(async (req, res) => {
   }
   password = bcrypt.hashSync(password, 10);
   user = await userModel.create({
-    adress: adress || null,
+    adress,
     fname,
     lname,
     email,
@@ -47,4 +47,24 @@ const login = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { addUser, login };
+const updateAdress = asyncHandler(async (req, res) => {
+  const { adress } = req.body;
+  if (!adress) {
+    res.status(400);
+    throw new Error("adress is required");
+  }
+  const user = await userModel.findById(req.user._id);
+  if (!user) {
+    res.status(404);
+    throw new Error("user not found");
+  }
+  await userModel.updateOne({ _id: user._id }, { adress });
+  res.json({
+    _id: user._id,
+    adress,
+    fname: user.fname,
+    lname: user.lname,
+    email: user.email,
+  });
+});
+module.exports = { addUser, login, updateAdress };

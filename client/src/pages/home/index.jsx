@@ -5,11 +5,19 @@ const Index = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
     const getProducts = async () => {
-      const { data } = await axios.get("/api/products");
-      setProducts(data);
+      try {
+        const { data } = await axios.get("/api/products");
+        setProducts(data);
+      } catch (error) {
+        const message =
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message;
+        alert(message);
+      }
     };
     getProducts();
-  });
+  }, []);
 
   return (
     <div

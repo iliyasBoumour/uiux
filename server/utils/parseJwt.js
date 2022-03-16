@@ -3,14 +3,13 @@ const asyncHandler = require("express-async-handler");
 
 const verifyToken = asyncHandler(async (req, res, next) => {
   let token = req.header("Authorization");
-  if (!token || !token.startsWith("Bearer")) {
+  if (!token) {
     res.status(401);
-    throw new Error("Unauthorized");
+    throw new Error("Not Authorized");
   }
   try {
     token = token.split(" ")[1];
     const user = jwt.verify(token, process.env.JWT_TOKEN);
-
     req.user = user;
     next();
   } catch (error) {

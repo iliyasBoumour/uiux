@@ -2,18 +2,23 @@ const express = require("express");
 const router = express.Router();
 const {
   getOrders,
-  addOrder,getOneOrder
+  addOrder,
+  getOrdersByUser,
+  validateOrder,
+  validateAdmin,
 } = require("../controllers/order.controller");
 
-// @desc    Fetch all orders
-// @route   GET/POST /api/:id/orders
+// @desc    Fetch all user's orders / add order
+// @route   GET/POST /api/orders
 // @access  Private
-router.route("/").get(getOrders).post(addOrder);
+router.route("/").get(getOrdersByUser).post(addOrder);
 
 // @desc    Fetch all orders
-// @route   GET/POST /api/:id/orders
-// @access  Private
-router.route("/:orderId").get(getOneOrder);
-
+// @route   GET/POST /api/orders/valid
+// @access  Admin access
+router
+  .route("/valid")
+  .get(validateAdmin, getOrders)
+  .put(validateAdmin, validateOrder);
 
 module.exports = router;

@@ -12,7 +12,6 @@ export const remove = async (dispatch, productId) => {
   });
 };
 export const removeAll = async (dispatch) => {
-  console.log("weee");
   dispatch({
     type: REMOVE_ALL_FROM_CART,
   });

@@ -2,6 +2,7 @@ import {
   ADD_TO_CART,
   REMOVE_FROM_CART,
   USER_LOGIN,
+  USER_LOGIN_FAIL,
   USER_LOGOUT,
   REMOVE_ALL_FROM_CART,
 } from "./actions/types";
@@ -35,8 +36,11 @@ const reducer = (state, { type, payload }) => {
       };
     case USER_LOGIN: {
       const { token } = payload;
-      localStorage.setItem("token", JSON.stringify(token));
+      localStorage.setItem("token", token);
       return { ...state, auth: { token } };
+    }
+    case USER_LOGIN_FAIL: {
+      return { ...state, auth: { token: null, error: payload } };
     }
     case USER_LOGOUT: {
       localStorage.removeItem("token");

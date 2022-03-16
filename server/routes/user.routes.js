@@ -1,6 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const { addUser, login } = require("../controllers/user.controller");
+const validateJwt = require("../utils/parseJwt");
+const {
+  addUser,
+  login,
+  updateAdress,
+} = require("../controllers/user.controller");
 
 // @desc    create user
 // @route   GET/POST /api/auth/register
@@ -11,5 +16,10 @@ router.route("/register").post(addUser);
 // @route   GET/POST /api/auth/login
 // @access  Private
 router.route("/login").post(login);
+
+// @desc    update adress
+// @route   PUT /api/auth/updateUser
+// @access  Private
+router.route("/updateUser").put(validateJwt, updateAdress);
 
 module.exports = router;

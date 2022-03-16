@@ -1,10 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Store } from "../../utils/Store";
 import { signin } from "../../utils/actions/authAction";
 const Index = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { dispatch } = useContext(Store);
+  const { dispatch, state } = useContext(Store);
   const login = async (e) => {
     e.preventDefault();
     signin(dispatch, {
@@ -12,6 +12,11 @@ const Index = () => {
       password,
     });
   };
+  useEffect(() => {
+    if (state.auth.error) {
+      alert(state.auth.error);
+    }
+  }, [state.auth.error]);
 
   return (
     <div style={{ width: "300px" }}>
@@ -21,7 +26,7 @@ const Index = () => {
       >
         <label>Email </label>
         <input
-          type="text"
+          type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />

@@ -2,25 +2,39 @@ const orderModel = require("../models/order.model");
 const userModel = require("../models/user.model");
 const productModel = require("../models/product.model");
 const asyncHandler = require("express-async-handler");
-var mongoose = require("mongoose");
+
+const validateAdmin = asyncHandler(async (req, res, next) => {
+  const user = await userModel.findById(req.user._id);
+  if (!user.isAdmin) {
+    res.status(403);
+    throw new Error("Only admins has access");
+  }
+  next();
+});
 
 const getOrders = asyncHandler(async (req, res) => {
-  const orders = await orderModel.find({ user: req.params.id });
-
+  const orders = await orderModel.find({ valid: false });
   res.json(orders);
 });
-const getOneOrder = asyncHandler(async (req, res) => {
-  const validParam = mongoose.Types.ObjectId.isValid(req.params.orderId);
-  if (!validParam) {
+const validateOrder = asyncHandler(async (req, res) => {
+  const { orderId } = req.body;
+  if (!orderId) {
     res.status(400);
-    throw new Error("bad param");
+    throw new Error("Bad params");
   }
-  const order = await orderModel.findById(req.params?.id);
+  const order = await orderModel.findById(orderId);
   if (!order) {
     res.status(404);
-    throw new Error("order not found");
+    throw new Error("Order not found");
   }
-  res.json(order);
+  const newOrd = await orderModel.updateOne({ _id: orderId }, { valid: true });
+
+  res.json(newOrd);
+});
+const getOrdersByUser = asyncHandler(async (req, res) => {
+  const orders = await orderModel.find({ user: req.user._id });
+
+  res.json(orders);
 });
 const addOrder = asyncHandler(async (req, res) => {
   const uid = req.user._id;
@@ -43,7 +57,6 @@ const addOrder = asyncHandler(async (req, res) => {
     user: uid,
     products: prodIds,
   });
-  // products.forEach((p, i) => (p.quantity = p.quantity - orders[i].qty));
   await Promise.all(
     products.map(async (p, i) => {
       await productModel.updateOne(
@@ -55,4 +68,10 @@ const addOrder = asyncHandler(async (req, res) => {
   res.status(201);
   res.json(order);
 });
-module.exports = { getOrders, addOrder, getOneOrder };
+module.exports = {
+  getOrders,
+  addOrder,
+  getOrdersByUser,
+  validateOrder,
+  validateAdmin,
+};

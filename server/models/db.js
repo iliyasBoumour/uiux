@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 
 const connectDb = async () => {
-    console.log("wee");
   try {
     await mongoose.connect(process.env.DB_HOST, {
       keepAlive: 1,

@@ -18,9 +18,14 @@ const Index = () => {
         password,
         adress,
       });
+      alert("User created please login !");
       return navigate("/login");
     } catch (error) {
-      alert("error");
+      alert(
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+      );
     }
   };
 
@@ -54,6 +59,7 @@ const Index = () => {
         <label>Adress </label>
         <input
           type="text"
+          required
           value={adress}
           onChange={(e) => setAdress(e.target.value)}
         />

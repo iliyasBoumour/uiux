@@ -6,6 +6,10 @@ const index = (product) => {
   const [qty, setQty] = useState(1);
   const { dispatch } = useContext(Store);
   const addToCart = () => {
+    if (qty > quantity) {
+      alert("out of stock");
+      return;
+    }
     add(dispatch, { ...product, qty });
     alert("added to cart!");
   };
