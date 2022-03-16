@@ -53,6 +53,9 @@ npm run dev
 # Functionalities
 
 - User can register, login and logout
+<img width="253" alt="Capture d’écran 2022-03-16 085647" src="https://user-images.githubusercontent.com/57861823/158542976-b3ba0869-1701-41f4-bafa-680dfe0fa671.png">
+<img width="253" alt="3" src="https://user-images.githubusercontent.com/57861823/158543843-2df8fc70-3ece-498b-ae62-1bd3660c3349.png">
+
 - User can add products to cart even if he is not connected
 - User can remove product from cart
 - User can change the quantity of product before making an order
