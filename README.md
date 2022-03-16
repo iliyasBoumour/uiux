@@ -15,6 +15,13 @@ The project can be easily installed and runned.
 
 To install:
 
+Backend
+
+```
+npm install
+```
+![Capture d’écran 2022-03-16 081822](https://user-images.githubusercontent.com/67969827/158537017-f0748112-180e-4a12-b8cf-f1c826991a51.png)
+
 Frontend
 
 ```
@@ -24,13 +31,7 @@ cd client
 ```
 npm install
 ```
-
-Backend
-
-```
-npm install
-```
-![Capture d’écran 2022-03-16 081822](https://user-images.githubusercontent.com/67969827/158537017-f0748112-180e-4a12-b8cf-f1c826991a51.png)
+![2Capture d’écran 2022-03-16 082133](https://user-images.githubusercontent.com/67969827/158537279-b4c38d61-adc4-4b14-aa3c-dcc3c8430455.png)
 
 
 # Database
