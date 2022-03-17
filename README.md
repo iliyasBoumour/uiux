@@ -33,15 +33,6 @@ npm install
 ```
 ![2Capture d’écran 2022-03-16 082133](https://user-images.githubusercontent.com/67969827/158537279-b4c38d61-adc4-4b14-aa3c-dcc3c8430455.png)
 
-
-# Database
-
-For database you do not need to configure anything, you just need to fill you database with dummy data ( for testing purposes ) 
-
-```
-npm run seed
-```
-
 # Run
 In package.json there is a script dev that will run the backend and the frontend both
 
@@ -49,6 +40,16 @@ In package.json there is a script dev that will run the backend and the frontend
 npm run dev
 ```
 ![3Capture d’écran 2022-03-16 082318](https://user-images.githubusercontent.com/67969827/158537602-43890199-a3d8-4909-bfbc-424af0d8b8ea.png)
+
+# Database
+
+The database already contains data for testing.
+You can fill your database with dummy data if there is no product by running : 
+
+```
+npm run seed
+```
+
 
 # Functionalities
 
