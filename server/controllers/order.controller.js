@@ -16,6 +16,7 @@ const getOrders = asyncHandler(async (req, res) => {
   const orders = await orderModel.find({ valid: false });
   res.json(orders);
 });
+
 const validateOrder = asyncHandler(async (req, res) => {
   const { orderId } = req.body;
   if (!orderId) {
@@ -31,11 +32,13 @@ const validateOrder = asyncHandler(async (req, res) => {
 
   res.json(newOrd);
 });
+
 const getOrdersByUser = asyncHandler(async (req, res) => {
   const orders = await orderModel.find({ user: req.user._id });
 
   res.json(orders);
 });
+
 const addOrder = asyncHandler(async (req, res) => {
   const uid = req.user._id;
   const orders = req.body;
@@ -48,7 +51,7 @@ const addOrder = asyncHandler(async (req, res) => {
   const products = await productModel.find({
     _id: { $in: prodIds },
   });
-  const isAvailable = products.filter((p, i) => p.quantity >= orders[i].qty);
+  const isAvailable = products.filter((p, i) => p.quantity >= orders[i].qty); // n'utilisez pas des variables aussi courtes que "i" ou "p" c'est dur à lire et à comprendre
   if (isAvailable.length !== orders.length) {
     res.status(400);
     throw new Error("not available");
@@ -58,7 +61,7 @@ const addOrder = asyncHandler(async (req, res) => {
     products: prodIds,
   });
   await Promise.all(
-    products.map(async (p, i) => {
+    products.map(async (p, i) => { // joli !
       await productModel.updateOne(
         { _id: orders[i]._id },
         { quantity: p.quantity - orders[i].qty }
@@ -68,6 +71,7 @@ const addOrder = asyncHandler(async (req, res) => {
   res.status(201);
   res.json(order);
 });
+
 module.exports = {
   getOrders,
   addOrder,

@@ -8,7 +8,7 @@ const catchErrors = (err, req, res, next) => {
   res.status(statusCode).json({
     message: err.message,
     statusCode,
-    stack: err.stack,
+    stack: err.stack, // evitez de donner la stack en prod, il faudrait tester l'environnement est choisir
   });
 };
 module.exports = { routeNoteFound, catchErrors };
