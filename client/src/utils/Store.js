@@ -1,7 +1,7 @@
 import React, { createContext, useReducer } from "react";
 import reducer from "./reducer";
 
-export const Store = createContext();
+export const Store = createContext(); // excellente idée
 
 const initialState = {
   cart: { cartItems: JSON.parse(localStorage.getItem("cart")) || [] },

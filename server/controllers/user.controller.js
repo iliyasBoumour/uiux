@@ -14,8 +14,8 @@ const addUser = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("User already exists");
   }
-  password = bcrypt.hashSync(password, 10);
-  user = await userModel.create({
+  password = bcrypt.hashSync(password, 10); // reassigner des valeurs comme ça peut être problématique, n'hésitez pas à faire une valeur "hash" intermédiaire
+  user = await userModel.create({ // même commentaire ici, évitez de réassigner des objects d'entrée 
     adress,
     fname,
     lname,
@@ -48,10 +48,10 @@ const login = asyncHandler(async (req, res) => {
 });
 
 const updateAdress = asyncHandler(async (req, res) => {
-  const { adress } = req.body;
+  const { adress } = req.body; // 2 d à address ;)
   if (!adress) {
     res.status(400);
-    throw new Error("adress is required");
+    throw new Error("address is required");
   }
   const user = await userModel.findById(req.user._id);
   if (!user) {
