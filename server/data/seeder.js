@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose"); // pas utilisé
 const connectDb = require("../models/db");
 const dotenv = require("dotenv");
 const products = require("./product");

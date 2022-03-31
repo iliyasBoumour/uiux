@@ -17,6 +17,7 @@ import { logout } from "../../utils/actions/authAction";
 import { Burger, Menu, MyLink } from "./style";
 import { Store } from "../../utils/Store";
 import { SimpleLink } from "../SimpleLink";
+import LanguageIcon from "@mui/icons-material/Language";
 const items = [
   { to: "/", name: "Home" },
   { to: "/cart", name: "Cart" },
@@ -81,6 +82,31 @@ const Index = () => {
               alignItems: "center",
             }}
           >
+            <div>
+              <Button
+                id="basic-button"
+                color="text"
+                aria-controls={open ? "basic-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
+                onClick={handleClick}
+                endIcon={<KeyboardArrowDownIcon />}
+              >
+                <LanguageIcon />
+              </Button>
+              <MuiMenu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                MenuListProps={{
+                  "aria-labelledby": "basic-button",
+                }}
+              >
+                <MenuItem>FR</MenuItem>
+                <MenuItem>EN</MenuItem>
+              </MuiMenu>
+            </div>
             {currentUser ? (
               <div>
                 <Button
