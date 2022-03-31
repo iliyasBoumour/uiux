@@ -27,10 +27,10 @@ const Index = () => {
   const [isopen, setIsopen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorLan, setAnchorLan] = useState(null);
-  const [openLan, setOpenLan] = useState(null);
   const [currentUser, setcurrentUser] = useState(null);
   const [nav, setNav] = useState(items);
   const open = Boolean(anchorEl);
+  const openLan = Boolean(anchorLan);
   const { state, dispatch } = useContext(Store);
   const {
     auth: { token },
@@ -88,9 +88,9 @@ const Index = () => {
               <Button
                 id="basic-button"
                 color="text"
-                aria-controls={true ? "basic-menu" : undefined}
+                aria-controls={openLan ? "basic-menu" : undefined}
                 aria-haspopup="true"
-                aria-expanded={true ? "true" : undefined}
+                aria-expanded={openLan ? "true" : undefined}
                 onClick={(e) => setAnchorLan(e.currentTarget)}
                 endIcon={<KeyboardArrowDownIcon />}
               >
