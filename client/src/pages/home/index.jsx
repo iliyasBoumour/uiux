@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Typography, Container, Grid, Box } from "@mui/material";
 import Product from "../../components/product";
+import Header from "../../components/Header";
+import { useSnackbar } from "notistack";
+
 const Index = () => {
   const [products, setProducts] = useState([]);
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
   useEffect(() => {
     const getProducts = async () => {
       try {
@@ -13,27 +19,33 @@ const Index = () => {
           error.response && error.response.data.message
             ? error.response.data.message
             : error.message;
-        alert(message);
+        enqueueSnackbar(message, {
+          variant: "error",
+          onClick: () => {
+            closeSnackbar();
+          },
+        });
       }
     };
     getProducts();
   }, []);
 
   return (
-    <div
-      style={{
-        maxWidth: "1200px",
-        margin: "auto",
-        display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "center",
-        gap: "1rem",
-      }}
-    >
-      {products.map((p) => (
-        <Product {...p} key={p._id} />
-      ))}
-    </div>
+    <header>
+      <Header />
+      <Container maxWidth="xl" sx={{ padding: "4rem", textAlign: "center" }}>
+        <Typography variant="h1" marginBottom={"2rem"}>
+          New Arrivals
+        </Typography>
+        <Grid container>
+          {products.map((p) => (
+            <Grid item xs={6} md={4} lg={3} key={p._id}>
+              <Product {...p} />
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
+    </header>
   );
 };
 

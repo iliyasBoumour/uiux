@@ -19,6 +19,19 @@ export const signin = async (dispatch, user) => {
     });
   }
 };
+export const signup = async (dispatch, user) => {
+  try {
+    await axios.post(`/api/auth/register`, user);
+  } catch (error) {
+    dispatch({
+      type: USER_LOGIN_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
 export const logout = (dispatch) => {
   dispatch({
     type: USER_LOGOUT,
