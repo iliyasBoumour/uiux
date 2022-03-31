@@ -5,7 +5,7 @@ const verifyToken = asyncHandler(async (req, res, next) => {
   let token = req.header("Authorization");
   if (!token) {
     res.status(401);
-    throw new Error("Not Authorized");
+    throw new Error("Sign in first");
   }
   try {
     token = token.split(" ")[1];
@@ -14,7 +14,7 @@ const verifyToken = asyncHandler(async (req, res, next) => {
     next();
   } catch (error) {
     res.status(401);
-    throw new Error("Unauthorized");
+    throw new Error("Verify that you are logged in");
   }
 });
 module.exports = verifyToken;
