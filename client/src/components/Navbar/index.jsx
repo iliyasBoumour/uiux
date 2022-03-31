@@ -26,6 +26,8 @@ const items = [
 const Index = () => {
   const [isopen, setIsopen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorLan, setAnchorLan] = useState(null);
+  const [openLan, setOpenLan] = useState(null);
   const [currentUser, setcurrentUser] = useState(null);
   const [nav, setNav] = useState(items);
   const open = Boolean(anchorEl);
@@ -86,19 +88,19 @@ const Index = () => {
               <Button
                 id="basic-button"
                 color="text"
-                aria-controls={open ? "basic-menu" : undefined}
+                aria-controls={true ? "basic-menu" : undefined}
                 aria-haspopup="true"
-                aria-expanded={open ? "true" : undefined}
-                onClick={handleClick}
+                aria-expanded={true ? "true" : undefined}
+                onClick={(e) => setAnchorLan(e.currentTarget)}
                 endIcon={<KeyboardArrowDownIcon />}
               >
                 <LanguageIcon />
               </Button>
               <MuiMenu
                 id="basic-menu"
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
+                anchorEl={anchorLan}
+                open={openLan}
+                onClose={() => setAnchorLan(null)}
                 MenuListProps={{
                   "aria-labelledby": "basic-button",
                 }}
